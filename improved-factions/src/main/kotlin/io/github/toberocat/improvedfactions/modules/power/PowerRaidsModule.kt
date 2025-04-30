@@ -42,11 +42,13 @@ class PowerRaidsModule : BaseModule {
         placeholders["maxPower"] = { it.factionUser().faction()?.maxPower?.toString() }
         (powerModuleHandle as? FactionPowerRaidModuleHandleImpl)?.let { handle ->
             placeholders["active_accumulation"] =
-                { player -> player.factionUser().faction()?.let { handle.getActivePowerAccumulation(it).toString() } }
+                { player -> player.factionUser().faction()?.let { round(handle.getActivePowerAccumulation(it), config.placeholderPrecision).toString() } }
             placeholders["inactive_accumulation"] =
-                { player -> player.factionUser().faction()?.let { handle.getInactivePowerAccumulation(it).toString() } }
+                { player -> player.factionUser().faction()?.let { round(handle.getInactivePowerAccumulation(it), config.placeholderPrecision).toString() } }
             placeholders["claim_upkeep_cost"] =
-                { player -> player.factionUser().faction()?.let { handle.getClaimMaintenanceCost(it).toString() } }
+                { player -> player.factionUser().faction()?.let { round(handle.getClaimMaintenanceCost(it), config.placeholderPrecision).toString() } }
+            placeholders["actual_accumulation"] =
+                { player -> player.factionUser().faction()?.let { round(handle.getPowerAccumulated(it), config.placeholderPrecision).toString() } }
         }
     }
 
@@ -54,5 +56,12 @@ class PowerRaidsModule : BaseModule {
         const val MODULE_NAME = "power-raids"
         fun powerRaidModule() = ImprovedFactionsPlugin.instance.moduleManager.getModule<PowerRaidsModule>(MODULE_NAME)
         fun powerRaidsPair() = MODULE_NAME to PowerRaidsModule()
+    }
+
+    private fun round(value: Double, precision: Int): Double {
+        if (precision < 0) return value
+
+        val factor = Math.pow(10.0, precision.toDouble())
+        return Math.round(value * factor) / factor
     }
 }

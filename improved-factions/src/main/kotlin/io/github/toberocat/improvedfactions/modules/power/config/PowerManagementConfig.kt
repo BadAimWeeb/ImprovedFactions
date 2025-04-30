@@ -21,7 +21,8 @@ data class PowerManagementConfig(
     var siegeBreachProgress: Double = 1.0,
     var siegeResistanceProgress: Double = .5,
     var siegeClaimRecoverySpeed: Double = 1.0,
-    var allowOverclaim: Boolean = true
+    var allowOverclaim: Boolean = true,
+    var placeholderPrecision: Int = 0
 ) {
     private val configPath = "factions.power-management"
     fun reload(config: FileConfiguration) {
@@ -49,5 +50,6 @@ data class PowerManagementConfig(
         siegeClaimRecoverySpeed =
             config.getUnsignedDouble("$configPath.siege.claim-recovery-speed", siegeClaimRecoverySpeed)
         allowOverclaim = config.getBoolean("$configPath.allow-overclaim", allowOverclaim)
+        placeholderPrecision = config.getInt("placeholder-digit-precision.power", placeholderPrecision)
     }
 }
