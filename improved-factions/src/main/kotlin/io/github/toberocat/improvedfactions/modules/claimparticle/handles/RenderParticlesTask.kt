@@ -12,12 +12,19 @@ import org.bukkit.Location
 import org.bukkit.Particle
 import org.bukkit.entity.Player
 import org.bukkit.scheduler.BukkitRunnable
+import java.util.UUID
 
-class RenderParticlesTask(private val config: ClaimParticleModuleConfig) : BukkitRunnable() {
+class RenderParticlesTask(
+    private val config: ClaimParticleModuleConfig, 
+    private val particleToggle: MutableMap<UUID, Boolean>
+) : BukkitRunnable() {
     override fun run() {
         LineHandler.clearCache()
         loggedTransaction {
             Bukkit.getOnlinePlayers().forEach { player ->
+                if (!particleToggle.getOrDefault(player.uniqueId, false)) {
+                    return@forEach
+                }
                 player.getCurrentClusters(config.chunkRenderDistance).forEach { player.renderClusterParticles(it) }
             }
         }

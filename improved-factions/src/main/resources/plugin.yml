@@ -78,6 +78,8 @@ permissions:
     default: true
   factions.map:
     default: true
+  factions.border:
+    default: true
   factions.zone:
     default: op
   factions.bypass:
