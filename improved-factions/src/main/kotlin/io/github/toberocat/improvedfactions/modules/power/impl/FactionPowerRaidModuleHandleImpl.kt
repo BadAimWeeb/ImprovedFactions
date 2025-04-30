@@ -78,8 +78,8 @@ class FactionPowerRaidModuleHandleImpl(private val config: PowerManagementConfig
             .runTaskTimer(
                 plugin,
                 ::claimKeepCostsCollector,
-                config.accumulationTickDelay + config.accumulationTickDelay / 2,
-                config.accumulationTickDelay
+                config.claimPowerKeepDeductionTickDelay + config.claimPowerKeepDeductionTickDelay / 2,
+                config.claimPowerKeepDeductionTickDelay
             ).taskId
     }
 

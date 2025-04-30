@@ -15,6 +15,7 @@ data class PowerManagementConfig(
     var inactiveAccumulationMultiplier: Double = 2.0,
     var accumulationMultiplier: Double = 10.0,
     var baseClaimPowerCost: Double = 5.0,
+    var claimPowerKeepDeductionTickDelay: Long = 1,
     var claimPowerCostGrowth: Double = 1.1,
     var claimPowerKeep: Double = 1.0,
     var playerDeathCost: Int = 5,
@@ -42,6 +43,8 @@ data class PowerManagementConfig(
         baseClaimPowerCost = config.getUnsignedDouble("$configPath.base-claim-power-cost", baseClaimPowerCost)
         claimPowerCostGrowth = config.getUnsignedDouble("$configPath.claim-power-cost-growth", claimPowerCostGrowth)
         claimPowerKeep = config.getUnsignedDouble("$configPath.claim-power-keep", claimPowerKeep)
+        claimPowerKeepDeductionTickDelay = (config.getEnum<TimeUnit>("$configPath.claim-power-keep-deduction-rate.unit")
+            ?: TimeUnit.HOURS).toSeconds(abs(config.getLong("$configPath.claim-power-keep-deduction-rate.value", 1))) * 20
         playerDeathCost = abs(config.getInt("$configPath.player-death-cost", playerDeathCost))
         siegeBreachProgress = config.getUnsignedDouble("$configPath.siege.breach-progress", siegeBreachProgress)
         siegeResistanceProgress =
