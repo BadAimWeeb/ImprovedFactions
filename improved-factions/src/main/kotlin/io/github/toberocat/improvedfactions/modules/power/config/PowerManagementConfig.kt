@@ -38,7 +38,7 @@ data class PowerManagementConfig(
             abs(
                 config.getLong("$configPath.inactive.value", 1)
             )
-        )
+        ) * 1000L
         baseClaimPowerCost = config.getUnsignedDouble("$configPath.base-claim-power-cost", baseClaimPowerCost)
         claimPowerCostGrowth = config.getUnsignedDouble("$configPath.claim-power-cost-growth", claimPowerCostGrowth)
         claimPowerKeep = config.getUnsignedDouble("$configPath.claim-power-keep", claimPowerKeep)
