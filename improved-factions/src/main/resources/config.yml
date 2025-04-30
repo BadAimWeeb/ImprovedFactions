@@ -424,5 +424,8 @@ default-placeholders:
   power: "0" # The default value for %faction_power%
   maxPower: "0" # The default value for %faction_maxPower%
 
+placeholder-digit-precision:
+  power: 0 # The number of digits after the decimal point for all power-related placeholder. This is the precision of the power placeholder. 0 means no decimal points, 1 means one decimal point, etc. Set to -1 to disable the precision cap.
+
 # This option decides if what kind of notification the players will receive when a certain event happens (Teleport, Territory change, etc)
 event-display-location: "TITLE" # Options are: TITLE, CHAT, ACTIONBAR

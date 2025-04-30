@@ -14,4 +14,5 @@ This plugin adds some placeholders via Papi (Placeholder API)
 - %faction_maxPower% - The max power of the faction
 - %faction_active_accumulation% - The active power accumulation
 - %faction_inactive_accumulation% - The inactive power accumulation
+- %faction_actual_accumulation% - The actual/final power accumulation
 - %faction_claim_upkeep_cost% - The claim upkeep cost of the faction
